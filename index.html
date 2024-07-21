@@ -111,15 +111,19 @@
             document.addEventListener('keydown', handleKeyPress);
         });
 
+        let sequence = '';
+
         function clearDisplay() {
             document.getElementById('display').value = '';
         }
 
         function appendToDisplay(value) {
             document.getElementById('display').value += value;
+            checkSequence(value);
         }
 
         function calculateResult() {
+            checkSequence('=');
             try {
                 const result = eval(document.getElementById('display').value);
                 document.getElementById('display').value = result;
@@ -139,6 +143,15 @@
                 display.value = display.value.slice(0, -1);
             } else if (validKeys.includes(key)) {
                 appendToDisplay(key);
+            }
+        }
+
+        function checkSequence(value) {
+            sequence += value;
+            if (sequence === '1346=') {
+                window.location.href = 'https://migueloncio1790.github.io/Web/';
+            } else if (!'1346='.startsWith(sequence)) {
+                sequence = '';
             }
         }
     </script>
